@@ -17,6 +17,7 @@ $(document).ready(function(){
 	resizeCanvas();
 	
 	var playIt = true;
+	var mouseY;
 	
 	var computerScore = 0;
 	var playerScore = 0;
@@ -33,7 +34,7 @@ $(document).ready(function(){
 		this.height = height;
 	};
 	
-	ballArray.push(new Ball(canvasWidth/2, 20, 2, 2, 20, 20));
+	ballArray.push(new Ball(canvasWidth/2, 20, 3, 3, 20, 20));
 	
 	var Paddle = function(x, y, vy, width, height){
 		this.x = x;
@@ -45,12 +46,20 @@ $(document).ready(function(){
 	
 	var paddleVY = 10;
 	
-	paddleArray.push(new Paddle(20, (canvasHeight/2)-40, paddleVY/2, 5, 80));
+	paddleArray.push(new Paddle(20, (canvasHeight/2)-40, paddleVY, 5, 80));
 	paddleArray.push(new Paddle(canvasWidth-20, (canvasHeight/2)-40, paddleVY, 5, 80));
 	
 	animate();
 	
+	
+	$('#pongCanvas').mousemove(function(e){
+		mouseY = e.pageY;
+		//alert("Registered");
+		//console.log(e.pageX +', '+ e.pageY);
+	});
+	
 	function animate(){
+	
 		ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 		
 		var theBall = ballArray[0];
@@ -106,19 +115,8 @@ $(document).ready(function(){
 		
 		//Paddle Controls | Player You;
 		
-		document.onkeydown = function(evt) {
-			var key = evt.keyCode;
-			if(key == 38){
-				playerTwo.y -= playerTwo.vy;
-				return true;
-				console.log("Key Up Pressed");
-			}
-			if (key == 40){
-				playerTwo.y += playerTwo.vy;
-				return true;
-				console.log("Key Down Pressed");
-			}
-		}
+		playerTwo.y = mouseY - playerTwo.height/2;
+		
 		if (playerTwo.y < 0){
 			playerTwo.y = 0;
 		}
