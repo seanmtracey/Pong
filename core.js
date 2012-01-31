@@ -44,7 +44,7 @@ $(document).ready(function(){
 		this.height = height;
 	}
 	
-	var paddleVY = 10;
+	var paddleVY = 15;
 	
 	paddleArray.push(new Paddle(20, (canvasHeight/2)-40, paddleVY, 5, 80));
 	paddleArray.push(new Paddle(canvasWidth-20, (canvasHeight/2)-40, paddleVY, 5, 80));
@@ -83,7 +83,7 @@ $(document).ready(function(){
 		
 		if(theBall.y <= 0){
 			theBall.vy *= -1;
-			if(theBall.vy > 0 && theBall.vy < 15 || theBall.vy < 0 && theBall.vy > -15){
+			if(theBall.vy > 0 && theBall.vy < 17 || theBall.vy < 0 && theBall.vy > -17){
 				theBall.vx = (theBall.vx)*1.1;
 				theBall.vy = (theBall.vy)*1.1;
 			} else {
@@ -94,7 +94,7 @@ $(document).ready(function(){
 		
 		if(theBall.y + theBall.height > canvasHeight){
 			theBall.vy *= -1;
-			if(theBall.vy > 0 && theBall.vy < 15 || theBall.vy < 0 && theBall.vy > -15){
+			if(theBall.vy > 0 && theBall.vy < 17 || theBall.vy < 0 && theBall.vy > -17){
 				theBall.vx = (theBall.vx)*1.1;
 				theBall.vy = (theBall.vy)*1.1;
 			} else {
@@ -126,10 +126,10 @@ $(document).ready(function(){
 		
 		//Paddle Controls | Player Computer
 		
-		if (playerOne.y + playerOne.height/2 < theBall.y){
+		if (playerOne.y + playerOne.height/2 < theBall.y + theBall.height/2){
 			playerOne.y += playerOne.vy;
 		}
-		if (playerOne.y + playerOne.height/2 > theBall.y){
+		if (playerOne.y + playerOne.height/2 > theBall.y + theBall.height/2){
 			playerOne.y -= playerOne.vy;
 		}
 		if (playerOne.y < 0){
@@ -161,9 +161,9 @@ $(document).ready(function(){
 	
 	function reset(){
 		ballArray[0].x = canvasWidth/2;
-		ballArray[0].y = 30;
-		ballArray[0].vx = 2;
-		ballArray[0].vy = 2;
+		ballArray[0].y = Math.floor(Math.random()*canvasHeight);
+		ballArray[0].vx = 3;
+		ballArray[0].vy = 3;
 	}
 	
 });
