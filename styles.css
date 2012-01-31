@@ -26,3 +26,7 @@ body{
 	background-color: #000;
 	cursor: none;
 }
+
+audio{
+	display: none;
+}

@@ -25,6 +25,9 @@ $(document).ready(function(){
 	var ballArray = new Array();
 	var paddleArray = new Array();
 	
+	var bounceSound = document.getElementById('bounce');
+	var missSound = document.getElementById('miss');
+	
 	var Ball = function(x, y, vx, vy, width, height){
 		this.x  = x;
 		this.y = y;
@@ -76,16 +79,22 @@ $(document).ready(function(){
 		
 		if(theBall.x <= -20){
 			playerScore++;
+			missSound.currentTime = 0;
+			missSound.play();
 			reset();
 		}
 		
 		if(theBall.x + theBall.width > canvasWidth + 20){
 			computerScore++;
+			missSound.currentTime = 0;
+			missSound.play();
 			reset();
 		}
 		
 		if(theBall.y <= 0){
 			theBall.vy *= -1;
+			bounceSound.currentTime = 0;
+			bounceSound.play();
 			if(theBall.vy > 0 && theBall.vy < 17 || theBall.vy < 0 && theBall.vy > -17){
 				theBall.vx = (theBall.vx)*1.1;
 				theBall.vy = (theBall.vy)*1.1;
@@ -97,6 +106,8 @@ $(document).ready(function(){
 		
 		if(theBall.y + theBall.height > canvasHeight){
 			theBall.vy *= -1;
+			bounceSound.currentTime = 0;
+			bounceSound.play();
 			if(theBall.vy > 0 && theBall.vy < 17 || theBall.vy < 0 && theBall.vy > -17){
 				theBall.vx = (theBall.vx)*1.1;
 				theBall.vy = (theBall.vy)*1.1;
@@ -110,10 +121,14 @@ $(document).ready(function(){
 		
 		if((theBall.x + theBall.width) > playerTwo.x && theBall.y > playerTwo.y && theBall.y < playerTwo.y + playerTwo.height){
 			theBall.vx *= -1;
+			bounceSound.currentTime = 0;
+			bounceSound.play();
 		}
 		
 		if((theBall.x) < playerOne.x + playerOne.width && theBall.y > playerOne.y && theBall.y < playerOne.y + playerOne.height){
 			theBall.vx *= -1;
+			bounceSound.currentTime = 0;
+			bounceSound.play();
 		}
 		
 		//Paddle Controls | Player You;
@@ -166,7 +181,7 @@ $(document).ready(function(){
 	
 	function reset(){
 		ballArray[0].x = canvasWidth/2;
-		ballArray[0].y = Math.floor(Math.random()*canvasHeight);
+		ballArray[0].y = Math.floor(Math.random()*(canvasHeight - 20));
 		ballArray[0].vx = 3;
 		ballArray[0].vy = 3;
 	}
