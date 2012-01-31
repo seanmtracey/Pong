@@ -54,8 +54,6 @@ $(document).ready(function(){
 	
 	$('#pongCanvas').mousemove(function(e){
 		mouseY = e.pageY;
-		//alert("Registered");
-		//console.log(e.pageX +', '+ e.pageY);
 	});
 	
 	function animate(){
