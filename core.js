@@ -51,6 +51,11 @@ $(document).ready(function(){
 	
 	animate();
 	
+	document.addEventListener("mousedown", preventIt, false);
+	
+	function preventIt(e){
+		e.preventDefault();
+	}
 	
 	$('#pongCanvas').mousemove(function(e){
 		mouseY = e.pageY;
@@ -121,6 +126,8 @@ $(document).ready(function(){
 		if (playerTwo.y + playerTwo.height > canvasHeight){
 			playerTwo.y = canvasHeight - playerTwo.height;
 		}
+		
+		playerTwo.x = canvasWidth - 20;
 		
 		//Paddle Controls | Player Computer
 		
