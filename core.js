@@ -5,6 +5,9 @@ $(document).ready(function(){
 	var canvasWidth = canvas.width();
 	var canvasHeight = canvas.height();
 
+	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+  	window.requestAnimationFrame = requestAnimationFrame;
+
 	$(window).resize(resizeCanvas);
 	
 	function resizeCanvas() {
@@ -175,7 +178,13 @@ $(document).ready(function(){
 		ctx.fillText("http://github.com/seanmtracey", 50, canvasHeight -10); 
 		
 		if(playIt == true){
-			setTimeout(animate, 33);
+			
+			if(requestAnimationFrame){
+				requestAnimationFrame(animate);
+			} else {
+				setTimeout(animate, 33);
+			}
+
 		};
 	}//ends Animate();
 	
